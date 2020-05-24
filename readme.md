@@ -1,4 +1,4 @@
 ## 说明
-生成指定网站的截图
+生成指定网站的截图，该功能利用的是 [Puppeteer](https://pptr.dev/) 提供的网站截图功能。
 
-![demo](https://tva1.sinaimg.cn/large/007S8ZIlgy1gf3xao0yo4j312c0ncwf9.jpg)
+![demo](./example/demo.jpg)
