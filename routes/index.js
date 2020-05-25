@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 router.get('/screenshot', async function(req, res, next) {
     let url = req.query.site;
     let { relativePagePath, relativeIconPath } = await util.generateScreenshot(url);
-    console.info('path', path);
 
     return res.status(200).json({
         pagePath: relativePagePath,

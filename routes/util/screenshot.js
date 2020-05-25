@@ -16,7 +16,7 @@ function getFaviconName(url) {
     var uri = new URL(url),
         prefixName = uri.hostname.replace(/\./g, '_'),
         filename = uri.pathname.split('/').pop(),
-        now = Date().now();
+        now = Date.now();
 
     return `${prefixName}_${now}_${filename}`;
 }
