@@ -31,7 +31,7 @@ function sendRequest() {
 
         let url = `./screenshot?site=${value}`;
         ajax(url, function(data) {
-            setImage(data.url);
+            setImage(data.pagePath);
         });
     }
 }
