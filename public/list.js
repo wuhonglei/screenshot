@@ -28,6 +28,7 @@ var vm = new Vue({
             return list;
         },
         refresh() {
+            console.info('刷新')
             this.list = this.loadData();
         }
     }

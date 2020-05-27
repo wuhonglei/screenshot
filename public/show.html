@@ -15,7 +15,7 @@
             margin-bottom: 10px;
         }
 
-        #wrapper {
+        .main-content {
             padding: 10px;
             border: 1px solid lightpink;
             /* background-color: lightgray; */
@@ -56,6 +56,11 @@
             font-size: 12px;
         }
 
+        .favicon {
+            width: 16px;
+            height: 16px;
+        }
+
         .preview {
             width: 200px;
             height: 130px;
@@ -66,16 +71,16 @@
 </head>
 
 <body>
-    <div class="container mt-3">
+    <div class="container mt-3" id="wrapper">
         <!-- Content here -->
         <div class="row">
             <button class="btn btn-primary" type="button" id="refresh" @click="refresh">刷新</button>
         </div>
-        <div class="row" id="wrapper">
+        <div class="row main-content">
             <div class="item" v-for="option in list">
                 <a :href="option.site" target="_blank">
                     <div class="header">
-                        <img :src="option.iconPath" alt="">
+                        <img class="favicon" :src="option.iconPath" alt="">
                         <span v-text="option.hostname"></span>
                     </div>
                     <img class="preview" :src="option.pagePath" alt="">
