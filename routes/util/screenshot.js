@@ -18,6 +18,7 @@ function getFaviconName(url) {
         filename = uri.pathname.split('/').pop(),
         now = Date.now();
 
+    console.info('url', url);
     return `${prefixName}_${now}_${filename}`;
 }
 
@@ -28,7 +29,8 @@ function getFaviconName(url) {
  * @returns {Promise<String>}
  */
 const findBestFaviconURL = async function(page, pageUrl) {
-    const rootUrl = (new URL(pageUrl)).protocol + "//" + (new URL(pageUrl)).host;
+    const uri = new URL(pageUrl);
+    const rootUrl = uri.protocol + "//" + uri.host;
     const selectorsToTry = [
         `link[rel="icon"]`,
         `link[rel="shortcut icon"]`
@@ -45,6 +47,10 @@ const findBestFaviconURL = async function(page, pageUrl) {
         break;
     }
 
+    if (faviconUrlFromDocument && faviconUrlFromDocument.startsWith('data:image')) {
+        return faviconUrlFromDocument;
+    }
+
     if (faviconUrlFromDocument === null) {
         // No favicon link found in document, best URL is likley favicon.ico at root
         return rootUrl + "/favicon.ico";
@@ -52,7 +58,7 @@ const findBestFaviconURL = async function(page, pageUrl) {
 
     if (faviconUrlFromDocument.substr(0, 4) === "http" || faviconUrlFromDocument.substr(0, 2) === "//") {
         // absolute url
-        return faviconUrlFromDocument;
+        return uri.protocol + faviconUrlFromDocument;
     } else if (faviconUrlFromDocument.substr(0, 1) === '/') {
         // favicon relative to root
         return (rootUrl + faviconUrlFromDocument);
@@ -92,10 +98,19 @@ async function generateScreenshot(url) {
 
     let faviconUrl = await findBestFaviconURL(page, url);
 
-    let relativeIconPath = `${pathConfig.icon}/${getFaviconName(url)}`;
+    // base64 图片
+    if (faviconUrl.startsWith('data:image')) {
+        return { relativePagePath, relativeIconPath: faviconUrl };
+    }
+
+    let relativeIconPath = `${pathConfig.icon}/${getFaviconName(faviconUrl)}`;
+    let iconFullpath = path.resolve('public', relativeIconPath);
+    console.info('iconFullpath', iconFullpath);
     try {
-        await saveImage(faviconUrl, relativeIconPath);
+        await saveImage(faviconUrl, iconFullpath);
     } catch (error) {
+        console.info('error', error);
+        console.info('图标抓取失败', faviconUrl);
         relativeIconPath = `${pathConfig.defaultIcon}`;
     }
 
