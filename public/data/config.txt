@@ -1,0 +1,3 @@
+locationStorage 数据：
+key: www.baidu.com
+value: { "hostname": "www.baidu.com", "pagePath": "./assets/pages/www_baidu_com_1590508495391.jpg", "iconPath": "./assets/icon/default.png" }
