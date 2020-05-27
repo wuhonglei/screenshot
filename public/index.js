@@ -21,7 +21,7 @@ function setStore(url, data) {
         site = uri.searchParams.get('site'),
         _uri = new URL(site),
         hostname = _uri.hostname,
-        item = Object.assign({ hostname }, data);
+        item = Object.assign({ site, hostname }, data);
 
     localStorage.setItem(hostname, JSON.stringify(item));
 }

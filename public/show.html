@@ -9,20 +9,58 @@
     <script src="./js/jquery-3.5.1.slim.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/vue.js"></script>
     <style>
-        .wrapper {
-            border: 1px solid lightpink;
-            background-color: lightgray;
+        #refresh {
+            margin-bottom: 10px;
         }
-        
+
+        #wrapper {
+            padding: 10px;
+            border: 1px solid lightpink;
+            /* background-color: lightgray; */
+        }
+
         .item {
             float: left;
             margin-right: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
         }
-        
+
+        .item:hover {
+            filter: opacity(0.6);
+            cursor: pointer;
+        }
+
+        .item a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .header {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            display: flex;
+            height: 30px;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .header>img {
+            margin-left: 4px;
+        }
+
+        .header>span {
+            margin-left: 4px;
+            font-size: 12px;
+        }
+
         .preview {
             width: 200px;
-            height: 150px;
+            height: 130px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
         }
     </style>
 </head>
@@ -30,16 +68,18 @@
 <body>
     <div class="container mt-3">
         <!-- Content here -->
-        <div class="row wrapper">
-            <div class="item">
-                <div class="header">
-                    <img src="./assets/icon/default.png" alt="">
-                </div>
-                <img class="preview" src="./assets/pages/www_baidu_com_1590306760089.jpg" alt="">
-            </div>
-            <div class="item">
-                <div class="header"></div>
-                <img class="preview" src="./assets/pages/www_baidu_com_1590306760089.jpg" alt="">
+        <div class="row">
+            <button class="btn btn-primary" type="button" id="refresh" @click="refresh">刷新</button>
+        </div>
+        <div class="row" id="wrapper">
+            <div class="item" v-for="option in list">
+                <a :href="option.site" target="_blank">
+                    <div class="header">
+                        <img :src="option.iconPath" alt="">
+                        <span v-text="option.hostname"></span>
+                    </div>
+                    <img class="preview" :src="option.pagePath" alt="">
+                </a>
             </div>
         </div>
     </div>
