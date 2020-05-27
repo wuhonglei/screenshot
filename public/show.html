@@ -11,33 +11,39 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/vue.js"></script>
     <style>
+        body {
+            background-image: url('./img/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
         #refresh {
             margin-bottom: 10px;
         }
-
+        
         .main-content {
             padding: 10px;
-            border: 1px solid lightpink;
+            /* border: 1px solid lightpink; */
             /* background-color: lightgray; */
         }
-
+        
         .item {
             float: left;
-            margin-right: 20px;
+            margin-right: 30px;
             border-radius: 4px;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
         }
-
+        
         .item:hover {
-            filter: opacity(0.6);
             cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
         }
-
+        
         .item a {
             color: black;
             text-decoration: none;
         }
-
+        
         .header {
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
@@ -46,21 +52,21 @@
             align-items: center;
             background-color: rgba(255, 255, 255, 0.8);
         }
-
+        
         .header>img {
             margin-left: 4px;
         }
-
+        
         .header>span {
             margin-left: 4px;
             font-size: 12px;
         }
-
+        
         .favicon {
             width: 16px;
             height: 16px;
         }
-
+        
         .preview {
             width: 200px;
             height: 130px;
@@ -73,7 +79,7 @@
 <body>
     <div class="container mt-3" id="wrapper">
         <!-- Content here -->
-        <div class="row">
+        <div class="row" style="padding-left: 10px;">
             <button class="btn btn-primary" type="button" id="refresh" @click="refresh">刷新</button>
         </div>
         <div class="row main-content">
