@@ -4,5 +4,8 @@
 ### 运行截图
 ![demo](./example/demo.jpg)
 
+### 标签展示截图
+![show](./example/show.jpg)
+
 ### 在线演示地址
 http://120.78.217.253/screenshot/
